@@ -17,7 +17,7 @@ def test_read_root_endpoint(client):
 def test_predict_endpoint_valid_applicant(client):
     """verifies that post /predict process """
     payload = {
-        "credit_score" : 750.0,
+        "credit_score" : 750,
         "dti_ratio" : 0.15
     }
     response = client.post("/predict",json=payload)
@@ -31,7 +31,7 @@ def test_predict_endpoint_valid_applicant(client):
 def test_predict_endpoint_invalid_applicant_bounds(client):
     """verifies that pydantic rejects"""
     invalid_payload = {
-        "credit_score" : 150.0,
+        "credit_score" : 150,
         "dti_ratio" : 0.15
     }
     response = client.post("/predict",json=invalid_payload)

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  sut: # System Under Test
+    build:
+      context: .
+      dockerfile: Dockerfile
+    Container_name: Credit_scoring_test_runner
+    command: ["python","-m","pytest","--cov=src","--cov=app","--cov-fail-under=80"]
+    enviornment:
+      - APP_ENV=testing
+      
