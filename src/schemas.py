@@ -1,8 +1,9 @@
 from pydantic import BaseModel, Field, ConfigDict
 
+
 class ApplicationData(BaseModel):
     """Input payload schemas for credit application inference requests."""
-    
+
     credit_score: float = Field(
         ...,
         ge=300.0,  # Bounded properly from 300 instead of 999
@@ -26,9 +27,11 @@ class ApplicationData(BaseModel):
         }
     )
 
+
 class PredictionResponce(BaseModel):
     """Structured output payload returned by the inference endpoint."""
-    
+
     status: str = Field(..., description="Credit decision status: 'Approved' or 'Denied'")
-    confidence: float = Field(..., description="Model decision confidence probabilities (0.0 - 1.0)")
+    confidence: float = Field(...,
+                              description="Model decision confidence probabilities (0.0 - 1.0)")
     raw_prediction: int = Field(..., description="Binary Prediction index (0=Approved, 1=Denied)")
