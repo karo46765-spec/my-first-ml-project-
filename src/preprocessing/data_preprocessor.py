@@ -3,7 +3,9 @@ import numpy as nm
 from sklearn.preprocessing import StandardScaler
 from src.exception import DataValidationError
 
-logging.basicConfig(level=logging.INFO , format="%(asctime)s - [%(levelname)s] - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 

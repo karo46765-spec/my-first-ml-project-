@@ -1,13 +1,13 @@
 from sklearn import model_selection
-import numpy as nm 
+import numpy as nm
 import joblib
 from sklearn.linear_model import LogisticRegression
 
-x = nm.array([[700],[550],[600],[650]])
-y = nm.array([0,1,1,0])
+x = nm.array([[700], [550], [600], [650]])
+y = nm.array([0, 1, 1, 0])
 
 model = LogisticRegression()
-model.fit(x,y)
+model.fit(x, y)
 
 model_filename = "credit_model.joblib"
 
@@ -22,4 +22,3 @@ new_applicant = nm.array([[720]])
 prediction = loaded_model.predict(new_applicant)
 
 print(f"{prediction[0]}")
-

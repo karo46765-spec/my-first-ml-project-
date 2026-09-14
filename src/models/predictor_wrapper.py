@@ -2,7 +2,7 @@ import numpy as nm
 from sklearn.linear_model import LogisticRegression
 
 
-class creditpredictor :
+class creditpredictor:
     def __init__(self, model):
         self.model = model
 
@@ -18,9 +18,9 @@ class creditpredictor :
             confidence = float(probabilities[raw_pred])
 
         return {
-            "status" : status,
-            "confidence" : confidence,
-            "raw_prediction" : int(raw_pred)
+            "status": status,
+            "confidence": confidence,
+            "raw_prediction": int(raw_pred),
         }
 
 
