@@ -1,6 +1,8 @@
 import pandas as pd
 
-durl="https://raw.githubusercontent.com/datasets/finance-vix/master/data/vix-daily.csv"
+durl = (
+    "https://raw.githubusercontent.com/datasets/finance-vix/master/data/vix-daily.csv"
+)
 
 df = pd.read(durl)
 

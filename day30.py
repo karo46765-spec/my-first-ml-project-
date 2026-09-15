@@ -1,4 +1,3 @@
-
 import numpy as nm
 import yaml
 from sklearn.linear_model import LogisticRegression
@@ -6,12 +5,12 @@ from sklearn.linear_model import LogisticRegression
 from src.preprocessing.data_preprocessor import creditprocessor
 from src.models.predictor_wrapper import creditpredictor
 
-with open("config.yaml","r") as f:
+with open("config.yaml", "r") as f:
     config = yaml.safe_load(f)
 
-nm.random.seed(42)  
+nm.random.seed(42)
 n_samples = 1000000
-credit_scores = nm.random.randint(170, 1000, size=(n_samples, 1))  
+credit_scores = nm.random.randint(170, 1000, size=(n_samples, 1))
 dti_ratios = nm.random.beta(a=2.5, b=3, size=(n_samples, 1)) * 1.2
 # Merge features horizontally into a single array
 x_train = nm.hstack((credit_scores, dti_ratios))
@@ -30,20 +29,21 @@ preprocessor = creditprocessor()
 preprocessor.fit_pipeline(x_train)
 x_train_scaled = preprocessor.transform_data(x_train)
 
-toy_model = LogisticRegression(random_state=config['model']['random_state'])
-toy_model.fit(x_train_scaled,y_train)
+toy_model = LogisticRegression(random_state=config["model"]["random_state"])
+toy_model.fit(x_train_scaled, y_train)
 
 predictor = creditpredictor(toy_model)
 
-raw_applicant = nm.array([[450,0.75]])
+raw_applicant = nm.array([[450, 0.75]])
 
 preprocessor.fit_pipeline(raw_applicant)
 scaledapplicant = preprocessor.transform_data(raw_applicant)
 
-final_responce=predictor.predict_structured(scaledapplicant)
+final_responce = predictor.predict_structured(scaledapplicant)
+
 
 def verify(self):
-    self.assertIsInstance(final_responce,dict)
+    self.assertIsInstance(final_responce, dict)
 
 
 print(f"{final_responce['prediction_status']}")

@@ -1,4 +1,4 @@
-import uvicorn 
+import uvicorn
 import multiprocessing
 
 if __name__ == "__main__":
@@ -11,7 +11,5 @@ if __name__ == "__main__":
         port=8000,
         workers=workers,
         log_level="info",
-        access_log=True
+        access_log=True,
     )
-
-    
