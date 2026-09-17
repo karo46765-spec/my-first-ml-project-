@@ -21,7 +21,7 @@ copy app.py /app/
 
 RUN chown -R appuser:appgroup /app
 
-USSER appuser
+USER appuser
 
 EXPOSE 8000
 
