@@ -54,7 +54,7 @@ jobs:
         id: meta 
         uses: docker/metadata-action@v4
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/karo46765-spec/my-first-ml-project
           tags: |
             type=raw,value=latest
             type=sha,prefix=sha-,format=short
