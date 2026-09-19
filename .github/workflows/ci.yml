@@ -30,7 +30,7 @@ jobs:
     - name: Run pytest Suite
       run: pytest --cov=src --cov=app --cov-fail-under=80
 
-  build-and-push-container:
+  build-scan-push-container:
     needs: test
     # This ensures container building only runs on pushes to main, or PRs being merged
     if: github.ref == 'refs/heads/main' || github.event_name == 'push'
@@ -38,6 +38,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      security-events: write
 
     steps:
       - name: Checkout Code
@@ -65,6 +66,24 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          load: true
+          tags: credit-scoring-api:local
+
+      - name: Run Trivy Security Vulnerability scan 
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'credit-scoring-api:local'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Push container Image to ghcr
+        uses: docker/build-push-action@v4
+        with:
+          Context: .
+          file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.output.tags }}
           labels: ${{ steps.meta.outputs.labels }}
