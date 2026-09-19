@@ -230,8 +230,7 @@ pandocfilters==1.5.1
 parso==0.8.4
 pathspec==1.0.4
 patsy==1.0.2
-pillow==11.3.0
-platformdirs==4.3.6
+Pillow>=12.3.0
 plotly==5.24.1
 pluggy==1.6.0
 polyfactory==3.3.0
@@ -293,8 +292,7 @@ seaborn==0.13.2
 segment-analytics-python==2.3.6
 semver==3.0.4
 Send2Trash==1.8.3
-setuptools==75.1.0
-shellingham==1.5.4
+setuptools>=78.1.1shellingham==1.5.4
 shortuuid==1.0.13
 shtab==1.8.0
 six==1.16.0
