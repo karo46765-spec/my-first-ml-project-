@@ -78,6 +78,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          trivyignore: .trivyignore 
 
       - name: Push container Image to ghcr
         uses: docker/build-push-action@v4
