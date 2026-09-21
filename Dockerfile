@@ -12,12 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY requirements.txt /app/
 
-RUN pip install --no-cache-dir  --upgrade pip && \
+# FIX: Explicitly upgrade pip, setuptools, and Pillow to their patched versions
+RUN pip install --no-cache-dir --upgrade pip "setuptools>=78.1.1" "Pillow>=12.3.0" && \
     pip install --no-cache-dir -r requirements.txt
 
 COPY config.yaml /app/
 COPY src/ /app/src/
-copy app.py /app/
+COPY app.py /app/
 
 RUN chown -R appuser:appgroup /app
 
