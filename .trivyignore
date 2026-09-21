@@ -1,2 +1,1 @@
-# moviepy requires pillow < 12.0; bypassing until moviepy adds support for pillow 12+
 CVE-2026-59205
