@@ -82,8 +82,8 @@ jobs:
       - name: Push container Image to ghcr
         uses: docker/build-push-action@v4
         with:
-          Context: .
+          context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.meta.output.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
