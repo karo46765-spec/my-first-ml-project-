@@ -1,4 +1,4 @@
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-bookworm AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -7,13 +7,25 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    && groupadd -r appgroup && useradd -r -g appgroup appuser \
     && rm -rf /var/lib/apt/lists/*
+
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
 COPY requirements.txt /app/
 
 RUN pip install --no-cache-dir --upgrade pip "setuptools>=78.1.1" && \
     pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.12-slim-bookworm AS runner
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PATH="/opt/venv/bin:$PATH"
+
+WORKDIR /app
+
+RUN groupadd -r appgroup && useradd -r -g appgroup -u 1001 appuser
+COPY --from=builder /opt/venv /opt/venv
 
 COPY config.yaml /app/
 COPY src/ /app/src/
